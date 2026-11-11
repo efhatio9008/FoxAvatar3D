@@ -1,0 +1,88 @@
+:root{font-family:Inter,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;background:#100b18;color:#f8ebf2;font-synthesis:none}
+*{box-sizing:border-box}
+html{min-width:300px}
+body{margin:0;background:radial-gradient(ellipse 65% 60% at 48% 34%,#2f202b 0,#17101f 58%,#0e0b15 100%);min-height:100svh}
+.site{width:min(100%,1520px);margin:0 auto;padding:18px clamp(12px,2vw,30px) 12px}
+.site-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 4px 18px}
+.brand{display:flex;align-items:center;gap:12px;font-size:17px;font-weight:750;letter-spacing:.18em}
+.brand small{color:#ecc8d8;font-size:10px;border:1px solid #ad829c;border-radius:20px;padding:3px 6px;vertical-align:middle;letter-spacing:.06em}
+.brand-emblem{display:grid;place-items:center;width:36px;height:36px;border:1px solid #ad8595;border-radius:50%;color:#f2c6cb;font-size:25px;background:#2b1c2d}
+.version{font-size:11px;letter-spacing:.14em;color:#bda8ba}
+.layout{display:grid;grid-template-columns:245px minmax(300px,1fr) 310px;align-items:start;gap:clamp(14px,1.75vw,26px)}
+.panel{background:rgba(24,17,32,.91);border:1px solid rgba(207,157,174,.37);border-radius:20px;box-shadow:0 8px 35px #0002;padding:21px 18px;line-height:1.55}
+.panel-about{margin-top:32px;padding-top:25px}
+.eyebrow{font-size:11px;letter-spacing:.17em;color:#d7b0c7;font-weight:650;margin:0 0 14px}
+h1{font-size:32px;font-weight:600;letter-spacing:.09em;margin:2px 0 20px;color:#f4d7ca}
+h1 span{color:#c7a5a4}.lede{color:#d8c5d1;font-size:14px;line-height:1.85;margin:0 0 22px}
+.hairline{height:1px;background:linear-gradient(90deg,transparent,#72556688,transparent);margin:18px 0}
+.feature{font-size:13px;color:#f0dce4;display:flex;align-items:center;gap:10px;margin:11px 0}.dot{width:6px;height:6px;flex-shrink:0;background:#e9babb;border-radius:50%;box-shadow:0 0 12px #edbdc888}
+.side-note{margin:22px 0 0;color:#b8a6b7;font-size:12px;line-height:1.85}
+.portrait-column{display:flex;align-items:center;flex-direction:column;min-width:0}
+.canvas-frame{position:relative;isolation:isolate;width:min(100%,490px,calc(72svh * var(--art-ratio,.666667)));aspect-ratio:var(--art-ratio,.666667);overflow:hidden;background:#120e15;border-radius:15px;box-shadow:0 15px 55px #0008,inset 0 0 0 1px #b68b9b50;cursor:grab;touch-action:none;user-select:none}
+.canvas-frame.dragging{cursor:grabbing}
+#portrait{display:block;width:100%;height:100%;transform-origin:center center;touch-action:none;will-change:transform}
+.frame-highlight{position:absolute;inset:0;border:1px solid rgba(240,214,214,.26);border-radius:15px;pointer-events:none;box-shadow:inset 0 0 30px #10091455}
+.loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#100b18;color:#f4dbe6;font-size:13px;letter-spacing:.05em;transition:opacity .3s;pointer-events:none}
+.loading.hidden{opacity:0;visibility:hidden}
+.loading.error{color:#ffc9c9;background:#170f19;padding:25px;text-align:center}
+.help{font-size:11px;color:#b8a6b8;margin:12px 0 0;text-align:center;letter-spacing:.02em}
+.help span{color:#e5bdbd;margin:0 7px}
+kbd{font:inherit;font-size:.85em;display:inline-block;border:1px solid #6d5a6a;border-radius:5px;padding:1px 5px;color:#efcdd8}
+.panel-controls{margin-top:5px}
+.controls-head{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;letter-spacing:.08em;color:#fff0f0}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#a7d1b6;box-shadow:0 0 10px #a7d1b6}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-top:17px;font-size:11px;letter-spacing:.08em;color:#dfbdcd;font-weight:700}
+.section-head small{color:#a394ab;font-size:10px}
+.selected-label{margin:8px 0 12px;font-size:14px;color:#fff0ef}
+.buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+button{font:inherit;cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s}
+button:focus-visible{outline:2px solid #ffd0c9;outline-offset:2px}
+.buttons button{min-height:43px;text-align:left;border-radius:10px;border:1px solid #584354;background:#281d30;color:#dfd2de;padding:8px 8px;display:flex;align-items:center;gap:7px;font-size:11px}
+.buttons button:hover{background:#3f2a40;border-color:#98718b}
+.buttons button[aria-pressed=true]{border-color:#e2a6b9;background:#513348;color:#fff0f4;box-shadow:0 0 0 1px #dc9eb53b inset}
+.swatch{width:12px;height:12px;border-radius:50%;display:inline-block;flex-shrink:0;background:var(--swatch);border:1px solid #ffffff6b}
+.wide-button,.reset-button{width:100%;padding:12px 13px;border-radius:11px;border:1px solid #805a76;color:#f9e2ef;background:#3b2739;font-size:13px;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.wide-button strong{margin-left:auto;color:#b8dfc8}.wide-button[aria-pressed=false] strong{color:#dbb1be}
+.reset-button{background:#1b1624;margin-top:14px;color:#d7c1d2;border-color:#594453}
+.wide-button:hover,.reset-button:hover{background:#55334e}
+.status-text{font-size:11px;letter-spacing:.05em;color:#c8b2c2;margin:8px 0 0}
+.control-note{font-size:11px;line-height:1.7;color:#b7a4b7;margin:18px 0 0}
+.footer{text-align:center;color:#8f7b90;margin:19px 0 4px;font-size:10px;letter-spacing:.1em}
+@media(max-width:1120px){.layout{grid-template-columns:minmax(270px,1fr) 315px}.panel-about{display:none}.portrait-column{align-self:start}}
+@media(max-width:725px){.site{padding:10px 10px 16px}.site-head{margin:3px 3px 14px}.brand{font-size:14px}.brand-emblem{width:31px;height:31px;font-size:22px}.version{font-size:9px}.layout{grid-template-columns:minmax(0,1fr);gap:18px}.canvas-frame{width:min(96%,430px,calc(72svh * var(--art-ratio,.666667)))}.panel-controls{max-width:570px;width:100%;margin:auto}.footer{font-size:9px}.help{font-size:10px}}
+@media(prefers-reduced-motion:reduce){button,.loading{transition:none}}
+
+/* Dual-character switch: displayed above the art so neither arrow hides the face or tail. */
+.character-switch{width:min(100%,490px);display:grid;grid-template-columns:minmax(68px,1fr) minmax(130px,1.5fr) minmax(68px,1fr);align-items:center;gap:8px;margin:0 0 13px;padding:6px;border:1px solid #a97d9457;border-radius:16px;background:#231724bd;box-shadow:0 8px 30px #0003}
+.switch-arrow{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border:1px solid #81597596;border-radius:11px;background:#392539;color:#ffdfef;font-size:29px;line-height:1;padding:3px 8px}
+.switch-arrow span{font-size:11px;letter-spacing:.03em;color:#ead5e2}
+.switch-arrow:hover{background:#5b3458;border-color:#e6afc5}
+.switch-arrow:disabled{opacity:.5;cursor:wait}
+.switch-center{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;text-align:center;min-width:0}
+.switch-kicker{color:#be9cac;font-size:9px;letter-spacing:.08em;white-space:nowrap}
+.switch-center strong{color:#ffe0db;font-weight:720;font-size:15px;letter-spacing:.04em}
+.switch-center small{color:#ba9faf;font-size:10px;font-variant-numeric:tabular-nums;letter-spacing:.12em}
+body[data-character="snake"] .switch-center strong{color:#e3d3ff}
+body[data-character="snake"] .brand-emblem{color:#e7c6f9;border-color:#b495bf}
+@media(min-width:726px) and (max-width:1120px){
+  .panel-about{display:block;grid-column:1 / -1;grid-row:2;margin:0}
+  .panel-about .hairline,.panel-about .feature,.panel-about .side-note{display:none}
+  .panel-about .lede{margin-bottom:0}
+  .portrait-column{grid-column:1;grid-row:1}
+  .panel-controls{grid-column:2;grid-row:1}
+}
+@media(max-width:725px){
+  .site-head{flex-wrap:wrap}
+  .layout{display:flex;flex-direction:column;align-items:center}
+  .portrait-column{order:1;width:100%}
+  .panel-about{display:block;order:2;width:100%;margin:0;padding:17px 18px}
+  .panel-about .eyebrow:not(:first-child),.panel-about .feature,.panel-about .hairline,.panel-about .side-note{display:none}
+  .panel-about h1{font-size:22px;margin:0 0 8px}
+  .panel-about .lede{font-size:12px;margin:0;line-height:1.65}
+  .panel-controls{order:3}
+  .character-switch{width:min(96%,430px);gap:5px;margin-bottom:12px;padding:5px;grid-template-columns:minmax(62px,1fr) minmax(130px,1.6fr) minmax(62px,1fr)}
+  .switch-arrow{min-height:48px;font-size:28px;gap:4px}
+  .switch-arrow span{font-size:10px}
+  .switch-center strong{font-size:13px}
+  .switch-kicker{font-size:8px}
+}
