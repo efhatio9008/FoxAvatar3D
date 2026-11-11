@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#100b18">
+  <title>Fox × Snake × Cat × Dragon Avatar · 2.5D Interactive</title>
+  <meta name="description" content="狐女、蛇女、猫女、龙女四角色国风／幻想风 2.5D 互动网站：独立尾巴、左右头发、衣裙动画，发色／布料换色，左右循环切换。">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
+  <script defer src="bgm.js"></script>
+  <script defer src="snow.js"></script>
+  <script defer src="magnifier.js"></script>
+</head>
+<body>
+  <!-- Music playback is automatic where permitted by the browser; no player buttons. -->
+  <audio id="site-bgm" src="1.mp3" preload="auto" autoplay loop playsinline hidden aria-hidden="true"></audio>
+  <div id="siteSnow" class="site-snow" aria-hidden="true"></div>
+  <div class="site">
+    <header class="site-head">
+      <div class="brand"><span class="brand-emblem" aria-hidden="true">✿</span><span>FOX · SNAKE · CAT · DRAGON <small>2.5D</small></span></div>
+      <div class="version">V0.7.1 · FOUR AVATARS</div>
+    </header>
+    <main class="layout">
+      <section class="panel panel-about" aria-label="角色介绍">
+        <p class="eyebrow">ILLUSTRATED CHARACTER</p>
+        <h1 id="characterTitle">狐灵 <span>·</span> 花影</h1>
+        <p class="lede" id="characterDescription">一幅有细腻立体感的国风狐娘立绘，狐尾、双侧长发与外层衣饰都可轻柔飘动。</p>
+        <div class="hairline"></div>
+        <p class="eyebrow">LIVE FEATURES</p>
+        <div class="feature"><span class="dot"></span> Hair tint · 发色换色</div>
+        <div class="feature"><span class="dot"></span> Fabric tint · 衣饰换色</div>
+        <div class="feature"><span class="dot"></span> <span id="featureTail">Tail motion · 狐尾轻摆</span></div>
+        <div class="feature"><span class="dot"></span> Hair motion · 左右头发独立飘动</div>
+        <div class="feature"><span class="dot"></span> Fabric motion · 衣袖与裙摆飘动</div>
+        <p class="side-note" id="characterNote">本版专注 2.5D 精细立绘：尾巴、左右两侧头发与外层衣袖／裙摆可分别开关飘动；脸、肩膀、手臂、手指、大腿、双脚与身体保持静止。发色和衣饰换色只作用于局部，不改变发型或服装款式。无眨眼、无旧 3D 跳转。</p>
+      </section>
+      <section class="portrait-column" aria-label="四角色互动展示">
+        <nav class="character-switch" aria-label="循环切换狐女、蛇女、猫女、龙女">
+          <button type="button" class="switch-arrow" id="previousCharacter" aria-label="切换到龙女" title="上一个角色">‹ <span>上一个</span></button>
+          <div class="switch-center" aria-live="polite"><span class="switch-kicker">SELECT CHARACTER · 选择角色</span><strong id="switchName">狐女 · FOX</strong><small id="switchIndex">01 / 04</small></div>
+          <button type="button" class="switch-arrow" id="nextCharacter" aria-label="切换到蛇女" title="下一个角色"><span>下一个</span> ›</button>
+        </nav>
+        <div class="canvas-frame">
+          <canvas id="portrait" width="640" height="960" aria-label="可以拖动、缩放的国风狐狸女孩立绘"></canvas>
+          <div class="loading" id="loading" role="status">正在加载角色素材…</div>
+          <div class="frame-highlight" aria-hidden="true"></div>
+        </div>
+        <div class="portrait-tools">
+          <p class="help">&#x62D6;&#x52A8;&#x4EBA;&#x7269;&#x5E73;&#x79FB; <span>·</span> &#x6EDA;&#x8F6E;&#x6216;&#x53CC;&#x6307;&#x7F29;&#x653E; <span>·</span> &#x6309; <kbd>R</kbd> &#x91CD;&#x7F6E;</p>
+          <button type="button" class="magnifier-open" id="openMagnifier" aria-haspopup="dialog" aria-controls="magnifierDialog" aria-label="&#x653E;&#x5927;&#x67E5;&#x770B;&#x5F53;&#x524D;&#x89D2;&#x8272;&#x5B8C;&#x6574;&#x7ACB;&#x7ED8;"><span class="magnifier-symbol" aria-hidden="true">&#128269;</span> &#x653E;&#x5927;&#x955C; <span class="magnifier-btn-sub">&#x67E5;&#x770B;&#x5168;&#x8EAB;&#x7EC6;&#x8282;</span></button>
+        </div>
+      </section>
+      <section class="panel panel-controls" aria-label="人物控制">
+        <div class="controls-head"><span>CHARACTER CONTROLS</span><span class="live-dot" aria-hidden="true"></span></div>
+        <div class="section-head"><span>HAIR TINT · 发色</span><small>1 — 4</small></div>
+        <p id="hairLabel" class="selected-label" aria-live="polite">Ink Black</p>
+        <div class="buttons" id="hairButtons">
+          <button type="button" data-hair="0" aria-pressed="true"><i class="swatch" style="--swatch:#332b36"></i> Ink Black</button>
+          <button type="button" data-hair="1" aria-pressed="false"><i class="swatch" style="--swatch:#c8c8d6"></i> Moon Silver</button>
+          <button type="button" data-hair="2" aria-pressed="false"><i class="swatch" style="--swatch:#9a4555"></i> Crimson Wine</button>
+          <button type="button" data-hair="3" aria-pressed="false"><i class="swatch" style="--swatch:#df8eae"></i> Sakura Rose</button>
+        </div>
+        <div class="hairline"></div>
+        <div class="section-head"><span>FABRIC COLORS · 衣饰</span><small>C 切换</small></div>
+        <p id="fabricLabel" class="selected-label" aria-live="polite">Jade & Ivory</p>
+        <div class="buttons" id="fabricButtons">
+          <button type="button" data-fabric="0" aria-pressed="true"><i class="swatch" style="--swatch:#58a99b"></i> Jade & Ivory</button>
+          <button type="button" data-fabric="1" aria-pressed="false"><i class="swatch" style="--swatch:#ad6abc"></i> Plum Dream</button>
+          <button type="button" data-fabric="2" aria-pressed="false"><i class="swatch" style="--swatch:#e36e73"></i> Coral Bloom</button>
+          <button type="button" data-fabric="3" aria-pressed="false"><i class="swatch" style="--swatch:#629cd3"></i> Blue Pearl</button>
+        </div>
+        <div class="hairline"></div>
+        <button class="wide-button motion-button" id="tailToggle" type="button" aria-pressed="true"><span class="motion-name" id="tailToggleText">✦ 狐尾轻摆</span> <strong>ON</strong> <kbd>T</kbd></button>
+        <p id="tailLabel" class="status-text" aria-live="polite">FOX TAIL MOTION: ON</p>
+        <button class="wide-button motion-button" id="hairMotionToggle" type="button" aria-pressed="true"><span class="motion-name">✦ 双侧头发飘动</span> <strong>ON</strong> <kbd>H</kbd></button>
+        <p id="hairMotionLabel" class="status-text" aria-live="polite">HAIR MOTION: ON</p>
+        <button class="wide-button motion-button" id="fabricMotionToggle" type="button" aria-pressed="true"><span class="motion-name">✦ 外层衣服飘动</span> <strong>ON</strong> <kbd>F</kbd></button>
+        <p id="fabricMotionLabel" class="status-text" aria-live="polite">FABRIC MOTION: ON</p>
+        <button class="reset-button" id="resetView" type="button">重置位置与缩放 <kbd>R</kbd></button>
+        <p class="control-note">独立控制尾巴、左右头发与外层衣服。换色只改变局部色调，保留原画纹理；蛇女吊坠跟随 T，蛇女和龙女下层裙摆跟随 F。无需安装 Godot 插件。</p>
+      </section>
+    </main>
+    <footer class="footer">FOX × SNAKE × CAT × DRAGON · ORIGINAL 2.5D CHARACTER ART · WEBGL / CANVAS2D</footer>
+  </div>
+  <div class="magnifier-dialog" id="magnifierDialog" role="dialog" aria-modal="true" aria-labelledby="magnifierTitle" hidden>
+    <div class="magnifier-shell">
+      <header class="magnifier-bar">
+        <div class="magnifier-heading"><small>AVATAR MAGNIFIER &#xB7; 2.5D</small><h2 id="magnifierTitle">&#x72D0;&#x5973;</h2></div>
+        <button class="magnifier-close" id="closeMagnifier" type="button" aria-label="&#x5173;&#x95ED;&#x653E;&#x5927;&#x955C;" title="&#x5173;&#x95ED;">&#215;</button>
+      </header>
+      <div class="magnifier-viewport" id="magnifierViewport" tabindex="0" aria-label="&#x53EF;&#x62D6;&#x52A8;&#x3001;&#x6EDA;&#x8F6E;&#x6216;&#x53CC;&#x6307;&#x7F29;&#x653E;&#x7684;&#x4EBA;&#x7269;&#x5B8C;&#x6574;&#x753B;&#x9762;">
+        <canvas id="magnifierCanvas" width="640" height="960" aria-hidden="true"></canvas>
+      </div>
+      <div class="magnifier-actions">
+        <button id="magnifierMinus" type="button" aria-label="&#x7F29;&#x5C0F;&#x753B;&#x9762;">&#8722;</button>
+        <output id="magnifierZoom" aria-live="polite">100%</output>
+        <button id="magnifierPlus" type="button" aria-label="&#x653E;&#x5927;&#x753B;&#x9762;">+</button>
+        <button id="magnifierFit" type="button">&#x663E;&#x793A;&#x5168;&#x8EAB;</button>
+      </div>
+      <p class="magnifier-hint">&#x7535;&#x8111;&#xFF1A;&#x62D6;&#x52A8;&#x67E5;&#x770B;&#x3001;&#x6EDA;&#x8F6E;&#x7F29;&#x653E;&#xFF1B;&#x624B;&#x673A;&#xFF1A;&#x5355;&#x6307;&#x79FB;&#x52A8;&#x3001;&#x53CC;&#x6307;&#x653E;&#x5927;&#x7F29;&#x5C0F;&#x3002;&#x6309; Esc &#x5173;&#x95ED;&#x3002;&#x8FD9;&#x91CC;&#x4E0D;&#x4F1A;&#x6539;&#x53D8;&#x539F;&#x4EBA;&#x7269;&#x7684;&#x7F29;&#x653E;&#x548C;&#x52A8;&#x753B;&#x3002;</p>
+    </div>
+  </div>
+</body>
+</html>
